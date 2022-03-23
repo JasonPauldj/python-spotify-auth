@@ -14,7 +14,7 @@ refresh_token=None
 
 def spotify_authorize(request):
     base_url='https://accounts.spotify.com/authorize'
-    query={'client_id': '0c52eb31f65e4d229ba147a9fc9b8e7c','response_type':'code','redirect_uri': redirect_uri, 'scope' : 'user-read-private user-read-email'}
+    query={'client_id': client_id,'response_type':'code','redirect_uri': redirect_uri, 'scope' : 'user-read-private user-read-email'}
     query_string=urlencode(query);
 
     url='{}?{}'.format(base_url,query_string)
