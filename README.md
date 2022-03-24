@@ -25,3 +25,18 @@ python manage.py runserver
 - Enter in your spotify details and log in
 - Next hit the endpoint http://localhost:8000/user/data
 - Next hit the endpoint http://localhost:8000/user/playlists
+
+## API Flow
+1. First hit http://localhost:8000/login. The view for this endpoint does the following: 
+  - User will be redirected to the url 'https://accounts.spotify.com/authorize'
+  - queryparams passed
+    - client_id
+    - response_type
+    - redirect_uri
+    - scope
+2. Once the user grants his permission, he is redirected to the specified redirect_uri which is the same as what is mentioned in the App in Spotify Developer portal. The redirect_uri will be having a query parameter called 'code' which needs to be exchanged for a access token.
+The view for the endpoint http://localhost:8000/callback/spac does the following:
+  - Hits the endpoint 'https://accounts.spotify.com/api/token'
+  - We capture the access_token and refresh_token from the response
+  - We use the access_token to hit other spotify endpoints
+  - We need the refresh_token to obtain a new access_token every 60 minutes.
